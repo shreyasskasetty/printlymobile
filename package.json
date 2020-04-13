@@ -2,7 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://shreyasskasetty.github.io/printlymobile",
+  "homepage": "https://shreyasskasetty.github.io/printlymobile/",
   "dependencies": {
     "@iconify/icons-ant-design": "^1.0.7",
     "@iconify/react": "^1.1.3",
