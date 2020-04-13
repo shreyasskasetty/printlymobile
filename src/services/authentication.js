@@ -285,7 +285,7 @@ authentication.signInWithAuthProvider = providerId => {
     }
 
     auth
-      .signInWithEmailAndPassword(provider)
+      .signInWithPopup(provider)
       .then(value => {
         const user = value.user;
 
