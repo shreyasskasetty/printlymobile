@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "https://shreyasskasetty.github.io/printly-pwa-mobile/static/css/main.f94b7fd9.chunk.css",
+    "main.js": "https://shreyasskasetty.github.io/printly-pwa-mobile/static/js/main.c23cd25e.chunk.js",
+    "main.js.map": "https://shreyasskasetty.github.io/printly-pwa-mobile/static/js/main.c23cd25e.chunk.js.map",
+    "runtime-main.js": "https://shreyasskasetty.github.io/printly-pwa-mobile/static/js/runtime-main.65ed33e8.js",
+    "runtime-main.js.map": "https://shreyasskasetty.github.io/printly-pwa-mobile/static/js/runtime-main.65ed33e8.js.map",
+    "static/css/2.030f99cb.chunk.css": "https://shreyasskasetty.github.io/printly-pwa-mobile/static/css/2.030f99cb.chunk.css",
+    "static/js/2.0d0daa0d.chunk.js": "https://shreyasskasetty.github.io/printly-pwa-mobile/static/js/2.0d0daa0d.chunk.js",
+    "static/js/2.0d0daa0d.chunk.js.map": "https://shreyasskasetty.github.io/printly-pwa-mobile/static/js/2.0d0daa0d.chunk.js.map",
+    "index.html": "https://shreyasskasetty.github.io/printly-pwa-mobile/index.html",
+    "precache-manifest.1fd1f6ee95b643d076efbcc798a90e8d.js": "https://shreyasskasetty.github.io/printly-pwa-mobile/precache-manifest.1fd1f6ee95b643d076efbcc798a90e8d.js",
+    "service-worker.js": "https://shreyasskasetty.github.io/printly-pwa-mobile/service-worker.js",
+    "static/css/2.030f99cb.chunk.css.map": "https://shreyasskasetty.github.io/printly-pwa-mobile/static/css/2.030f99cb.chunk.css.map",
+    "static/css/main.f94b7fd9.chunk.css.map": "https://shreyasskasetty.github.io/printly-pwa-mobile/static/css/main.f94b7fd9.chunk.css.map",
+    "static/js/2.0d0daa0d.chunk.js.LICENSE.txt": "https://shreyasskasetty.github.io/printly-pwa-mobile/static/js/2.0d0daa0d.chunk.js.LICENSE.txt",
+    "static/media/error.5446a452.svg": "https://shreyasskasetty.github.io/printly-pwa-mobile/static/media/error.5446a452.svg",
+    "static/media/insert-block.8e87797e.svg": "https://shreyasskasetty.github.io/printly-pwa-mobile/static/media/insert-block.8e87797e.svg",
+    "static/media/no-data.f9b088ce.svg": "https://shreyasskasetty.github.io/printly-pwa-mobile/static/media/no-data.f9b088ce.svg",
+    "static/media/not-found.79697997.svg": "https://shreyasskasetty.github.io/printly-pwa-mobile/static/media/not-found.79697997.svg",
+    "static/media/index.css": "https://shreyasskasetty.github.io/printly-pwa-mobile/static/media/roboto-latin-900italic.ebf6d164.woff2"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.65ed33e8.js",
+    "static/css/2.030f99cb.chunk.css",
+    "static/js/2.0d0daa0d.chunk.js",
+    "static/css/main.f94b7fd9.chunk.css",
+    "static/js/main.c23cd25e.chunk.js"
+  ]
+}
