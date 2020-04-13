@@ -285,7 +285,7 @@ authentication.signInWithAuthProvider = providerId => {
     }
 
     auth
-      .signInWithRedirect(provider)
+      .signInWithEmailAndPassword(provider)
       .then(value => {
         const user = value.user;
 
