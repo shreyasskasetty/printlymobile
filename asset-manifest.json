@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/printlymobile/static/css/main.f94b7fd9.chunk.css",
-    "main.js": "/printlymobile/static/js/main.70f97925.chunk.js",
-    "main.js.map": "/printlymobile/static/js/main.70f97925.chunk.js.map",
+    "main.js": "/printlymobile/static/js/main.0b4010b9.chunk.js",
+    "main.js.map": "/printlymobile/static/js/main.0b4010b9.chunk.js.map",
     "runtime-main.js": "/printlymobile/static/js/runtime-main.2debe08f.js",
     "runtime-main.js.map": "/printlymobile/static/js/runtime-main.2debe08f.js.map",
     "static/css/2.fe007f4c.chunk.css": "/printlymobile/static/css/2.fe007f4c.chunk.css",
-    "static/js/2.d4c5253c.chunk.js": "/printlymobile/static/js/2.d4c5253c.chunk.js",
-    "static/js/2.d4c5253c.chunk.js.map": "/printlymobile/static/js/2.d4c5253c.chunk.js.map",
+    "static/js/2.72882bb9.chunk.js": "/printlymobile/static/js/2.72882bb9.chunk.js",
+    "static/js/2.72882bb9.chunk.js.map": "/printlymobile/static/js/2.72882bb9.chunk.js.map",
     "index.html": "/printlymobile/index.html",
-    "precache-manifest.2d859b11c59120e617733048b9a6d947.js": "/printlymobile/precache-manifest.2d859b11c59120e617733048b9a6d947.js",
+    "precache-manifest.265a3f68182fbd00e5b0197542327327.js": "/printlymobile/precache-manifest.265a3f68182fbd00e5b0197542327327.js",
     "service-worker.js": "/printlymobile/service-worker.js",
     "static/css/2.fe007f4c.chunk.css.map": "/printlymobile/static/css/2.fe007f4c.chunk.css.map",
     "static/css/main.f94b7fd9.chunk.css.map": "/printlymobile/static/css/main.f94b7fd9.chunk.css.map",
-    "static/js/2.d4c5253c.chunk.js.LICENSE.txt": "/printlymobile/static/js/2.d4c5253c.chunk.js.LICENSE.txt",
+    "static/js/2.72882bb9.chunk.js.LICENSE.txt": "/printlymobile/static/js/2.72882bb9.chunk.js.LICENSE.txt",
     "static/media/error.5446a452.svg": "/printlymobile/static/media/error.5446a452.svg",
     "static/media/insert-block.8e87797e.svg": "/printlymobile/static/media/insert-block.8e87797e.svg",
     "static/media/no-data.f9b088ce.svg": "/printlymobile/static/media/no-data.f9b088ce.svg",
@@ -23,8 +23,8 @@
   "entrypoints": [
     "static/js/runtime-main.2debe08f.js",
     "static/css/2.fe007f4c.chunk.css",
-    "static/js/2.d4c5253c.chunk.js",
+    "static/js/2.72882bb9.chunk.js",
     "static/css/main.f94b7fd9.chunk.css",
-    "static/js/main.70f97925.chunk.js"
+    "static/js/main.0b4010b9.chunk.js"
   ]
 }
