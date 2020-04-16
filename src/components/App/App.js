@@ -24,7 +24,7 @@ const initialState = {
   userData: null,
   searchField:false,
   roles: [],
-
+  backButton: false,
   aboutDialog: {
     open: false
   },
@@ -151,6 +151,7 @@ class App extends Component {
     );
   };
 
+
   deleteAccount = () => {
     this.setState(
       {
@@ -238,6 +239,14 @@ class App extends Component {
       else
       this.setState({searchField :false})
   };
+
+  setBackButton = (i)=>{
+    if(i==0)
+    this.setState({backButton:true});
+    else
+    this.setState({backButton:false})
+
+  }
   closeSnackbar = (clearMessage = false) => {
     const { snackbar } = this.state;
 
@@ -258,6 +267,7 @@ class App extends Component {
       userData,
       roles,
       searchField,
+      backButton
     } = this.state;
 
     const {
@@ -285,8 +295,11 @@ class App extends Component {
                 roles={roles}
                 searchfield={searchField}
                 onNearbyShopsClick={(index)=>this.setSearchVisibility(index)}
+                onProfileOpen={(i)=>this.setBackButton(i)}
                 bar={
                   <Bar
+                    onProfileOpen={(index)=>this.setBackButton(index)}
+                    backButton={backButton}
                     searchField={searchField}
                     performingAction={performingAction}
                     theme={theme}

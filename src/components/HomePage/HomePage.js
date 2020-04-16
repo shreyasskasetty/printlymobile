@@ -74,7 +74,7 @@ class HomePage extends Component {
     const {onNearbyShopsClick} =this.props;
 
     if (user) {
-      return <BottomAppBar searchField={searchField} onNearbyShopsClick={onNearbyShopsClick}/>;
+      return <BottomAppBar searchField={searchField} onNearbyShopsClick={onNearbyShopsClick} user={user}/>;
     }
 
     return (

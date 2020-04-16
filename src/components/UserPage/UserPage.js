@@ -14,7 +14,7 @@ import EmptyState from "../EmptyState";
 
 import Loader from "../Loader";
 import UserCard from "../UserCard";
-
+import {useHistory} from 'react-router-dom'
 import { ReactComponent as ErrorIllustration } from "../../illustrations/error.svg";
 import { ReactComponent as NoDataIllustration } from "../../illustrations/no-data.svg";
 
@@ -25,14 +25,16 @@ const useStyles = makeStyles({
   }
 });
 
-function UserPage() {
+function UserPage(props) {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const { userId } = useParams();
   const classes = useStyles();
-
+  const history = useHistory();
+const {onProfileOpen} = props
   useEffect(() => {
+    onProfileOpen(0)
     return firestore
       .collection("users")
       .doc(userId)
@@ -46,6 +48,8 @@ function UserPage() {
           setError(error);
         }
       );
+
+      
   }, [userId]);
 
   if (error) {

@@ -1,9 +1,8 @@
-import React,{useEffect} from 'react';
-import { createStyles,  makeStyles } from '@material-ui/core/styles';
+import React from 'react';
+//import { createStyles,  makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
@@ -12,54 +11,22 @@ import PersonPinIcon from '@material-ui/icons/PersonPin';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
+import Paper from '@material-ui/core/Paper';
 import HistoryIcon from '@material-ui/icons/History';
-import NearbyShopCard from './NearbyShopCard.js'
-
-
-const messages = [
-  {
-    id: 1,
-    shopname: 'Brunch this week?',
-    address: "I'll be in the neighbourhood this week. Let's grab a bite to eat",
-    img: "https://image.freepik.com/free-photo/river-foggy-mountains-landscape_1204-511.jpg",
-  },
-  {
-    id: 2,
-    shopname: 'Brunch this week?',
-    address: "I'll be in the neighbourhood this week. Let's grab a bite to eat",
-    img: "https://image.freepik.com/free-photo/river-foggy-mountains-landscape_1204-511.jpg",
-  },
-  {
-    id: 3,
-    shopname: 'Brunch this week?',
-    address: "I'll be in the neighbourhood this week. Let's grab a bite to eat",
-    img: "https://image.freepik.com/free-photo/river-foggy-mountains-landscape_1204-511.jpg",
-  },
-  {
-    id: 4,
-    shopname: 'Brunch this week?',
-    address: "I'll be in the neighbourhood this week. Let's grab a bite to eat",
-    img: "https://image.freepik.com/free-photo/river-foggy-mountains-landscape_1204-511.jpg",
-  },
-  {
-    id: 5,
-    shopname: 'Brunch this week?',
-    address: "I'll be in the neighbourhood this week. Let's grab a bite to eat",
-    img: "https://image.freepik.com/free-photo/river-foggy-mountains-landscape_1204-511.jpg",
-  },
-  {
-    id: 6,
-    shopname: 'Brunch this week?',
-    address: "I'll be in the neighbourhood this week. Let's grab a bite to eat",
-    img: "https://image.freepik.com/free-photo/river-foggy-mountains-landscape_1204-511.jpg",
-  },
-  
-];
+import Page1 from './Page1'
+import Page2 from './Page2'
+import Page3 from './Page3'
+import Page4 from './Page4'
+import {Route,Switch,Link} from 'react-router-dom'
+import { withStyles } from '@material-ui/styles';
+import { BrowserRouter, HashRouter } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 
-const useStyles = makeStyles((theme) =>
-  createStyles({
+
+
+
+const useStyles = theme=>({
     text: {
       textAlign:"center",
       padding: theme.spacing(2, 2, 0),
@@ -89,13 +56,10 @@ const useStyles = makeStyles((theme) =>
       right: 0,
       margin: '0 auto',
     },
-  }),
-);
+  })
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-
-    
     return (
       <Typography
         component="div"
@@ -124,67 +88,81 @@ function TabPanel(props) {
   }
 
   
-export default function BottomAppBar(props) {
-  const classes = useStyles();
-  const {fieldsearch,onNearbyShopsClick} = props;
-  const [value, setValue] = React.useState(0);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-  useEffect(() => {
-   onNearbyShopsClick(value)
-  },[fieldsearch]);
+  class BottomAppBar extends React.Component {
 
-
-  return (
-    
-    <React.Fragment>
-        <TabPanel value={value} index={0} >
-        <Paper square className={classes.paper}>
-       
-        {/* <Typography className={classes.text} variant="h5" gutterBottom>
-          Nearby Shops
-        </Typography> */}
-        <Box display="flex" justifyContent="center" flexDirection="row" flexWrap="wrap">
-        {
-            messages.map(({id, shopname, address, img}) => (
-              <Box key={id} m={2}>
-              <NearbyShopCard shopinfo={{id,shopname,address,img}}/>
-              </Box>
-             
-          ))}
-        </Box> 
-        </Paper>
-        
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-            Page Two
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-              Profile
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-        <Paper square className={classes.paper}>
-        <Typography className={classes.text} variant="h5" gutterBottom>
-          Inbox
-        </Typography>
-      </Paper>
-        </TabPanel>
-      <CssBaseline />
+    constructor(props){
+      super(props);
+      this.state={
+        value:0
+      }
+    }
+    render(){
+      const {classes,
+        onNearbyShopsClick,
+        user,
       
-      <AppBar  position="fixed" color="primary" className={classes.appBar}>
-      <Tabs
-        variant="fullWidth"
-          value={value}
-          onChange={handleChange}
-        >
-            <Tab  icon={<LocationOnIcon />} onClick={()=>{onNearbyShopsClick(0)}} aria-label="phone" {...a11yProps(0)} />
-          <Tab  icon={<FavoriteIcon />} onClick={()=>{onNearbyShopsClick(1)}} aria-label="favorite" {...a11yProps(1)} />
-          <Tab icon={<PersonPinIcon />} onClick={()=>{onNearbyShopsClick(2)}} aria-label="person" {...a11yProps(2)} />
-          <Tab icon={<HistoryIcon />} onClick={()=>{onNearbyShopsClick(3)}} aria-label="help" {...a11yProps(3)} />
-          <Tab icon={<QueryBuilderIcon />} onClick={()=>{onNearbyShopsClick(4)}} aria-label="shopping" {...a11yProps(4)} />
-        </Tabs>
-      </AppBar>
-    </React.Fragment>
-  );
+      } = this.props;
+      const handleChange = (event, newValue) => {
+        this.setState({value:newValue})
+      };
+    
+      return (
+       <HashRouter basename="/">
+         <Switch>
+         <React.Fragment>
+           <Route exact path="/">
+           <TabPanel value={this.state.value} index={0} >
+            <Page1 classes ={classes}  onPage1Load={onNearbyShopsClick}/>
+            </TabPanel>
+           </Route>
+          
+            <Route exact path="/favourite">
+            <TabPanel value={this.state.value} index={1}>
+              <Page2 />
+            </TabPanel>
+            </Route>
+            <Route exact path="/page3">
+            <TabPanel value={this.state.value} index={2}>
+              <Page3 />
+            </TabPanel>
+            </Route>  
+            
+            <Route exact path="/orderhistory">
+            <TabPanel value={this.state.value} index={3}>
+            <Paper square className={classes.paper}>
+              <Typography className={classes.text} variant="h5" gutterBottom>
+                 <Page4 />
+            </Typography>
+              </Paper>
+            </TabPanel>
+            </Route>  
+            <Route exact path="/orderstatus">
+            <TabPanel value={this.state.value} index={4}>
+
+            </TabPanel>
+            </Route>  
+            
+          <CssBaseline />
+          
+          <AppBar  position="fixed" color="primary" className={classes.appBar}>
+          <Tabs
+            variant="fullWidth"
+              value={this.state.value}
+              onChange={handleChange}
+            >
+              <Tab  icon={<LocationOnIcon />}  component={Link} to="/" aria-label="phone" {...a11yProps(0)} />
+              <Tab  icon={<FavoriteIcon />} component={Link} to="favourite" aria-label="favorite" {...a11yProps(1)} />
+              <Tab icon={<PersonPinIcon />} component={Link} to="page3" aria-label="person" {...a11yProps(2)} />
+              <Tab icon={<HistoryIcon />} component={Link} to="orderhistory"aria-label="help" {...a11yProps(3)} />
+              <Tab icon={<QueryBuilderIcon />} component={Link} to="orderstatus" aria-label="shopping" {...a11yProps(4)} />
+            </Tabs>
+          </AppBar>
+        </React.Fragment>
+         </Switch>
+             
+        </HashRouter>
+      );
+    }
+  
 }
+export default withStyles(useStyles)(BottomAppBar);

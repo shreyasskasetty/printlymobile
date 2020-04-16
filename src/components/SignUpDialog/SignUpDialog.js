@@ -285,13 +285,13 @@ class SignUpDialog extends Component {
         <Hidden xsDown>
           <DialogContent>
             <Grid container direction="row">
-              <Grid item xs={4}>
+              
+            <Grid item xs={4}>
                 <AuthProviderList
                   performingAction={performingAction}
                   onAuthProviderClick={this.signInWithAuthProvider}
                 />
               </Grid>
-
               <Grid item xs={1}>
                 <Divider className={classes.divider} orientation="vertical" />
               </Grid>
@@ -378,6 +378,7 @@ class SignUpDialog extends Component {
                       variant="outlined"
                       onChange={this.handlePasswordConfirmationChange}
                     />
+                    
                   </Grid>
                 </Grid>
               </Grid>

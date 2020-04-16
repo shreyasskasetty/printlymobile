@@ -16,6 +16,9 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import { Link } from "react-router-dom";
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { createBrowserHistory } from 'history';
+
 
 import {
   AppBar,
@@ -29,14 +32,6 @@ import {
 } from "@material-ui/core";
 
 import UserAvatar from "../UserAvatar";
-const styles = {
-  list: {
-    width: '25%',
-  },
-  fullList: {
-    width: 'auto',
-  },
-}
 const useStyles = (theme) => createStyles({
 
   list: {
@@ -83,7 +78,7 @@ const useStyles = (theme) => createStyles({
     },
   },
 })
-
+const history = createBrowserHistory();
 class Bar extends Component {
   constructor(props) {
     super(props);
@@ -94,7 +89,7 @@ class Bar extends Component {
 
   render() {
     // // Properties
-    const { performingAction, user, userData, roles } = this.props;
+    const { performingAction, user, userData, roles, onProfileOpen } = this.props;
     const {classes} = this.props
     const toggleDrawer = (anchor, open) => (event) => {
       if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -185,15 +180,20 @@ class Bar extends Component {
     // const { menu } = this.state;
 
     const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
-
+    const onBackClick=()=>{
+      onProfileOpen(1);
+      history.goBack()
+    }
     return (
       <AppBar color="primary" position="static">
         <Toolbar>
+          {this.props.backButton?<IconButton onClick={onBackClick} ><ArrowBackIcon /></IconButton>:
           <Box display="flex" flexGrow={1} m={1}>
             <Typography color="inherit" variant="h6">
               {process.env.REACT_APP_TITLE}
             </Typography>
           </Box>
+          }
           {searchfield && <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />

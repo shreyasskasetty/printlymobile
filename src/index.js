@@ -6,6 +6,9 @@ import * as Sentry from "@sentry/browser";
 import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 import {BrowserRouter as Router} from "react-router-dom"
+import {createStore} from 'redux'
+import {Provider} from 'react-redux'
+// const store = createStore();
 
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,

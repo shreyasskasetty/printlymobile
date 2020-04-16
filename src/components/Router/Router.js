@@ -2,40 +2,42 @@ import React, { Component } from "react";
 
 import PropTypes from "prop-types";
 
-import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
+import { Switch, Redirect, Route } from "react-router-dom";
 
 import HomePage from "../HomePage";
-import AdminPage from "../AdminPage";
+//import AdminPage from "../AdminPage";
 import UserPage from "../UserPage";
 import NotFoundPage from "../NotFoundPage";
-import { HashRouter } from "react-router-dom/cjs/react-router-dom.min";
+import Page1 from '../BottomAppBar/Page1'
+import Page2 from '../BottomAppBar/Page2'
+import {HashRouter, BrowserRouter } from "react-router-dom/cjs/react-router-dom.min";
 
 class Router extends Component {
   render() {
     // Properties
-    const { user, roles, bar,searchfield } = this.props;
+    const { user, bar,searchfield,onProfileOpen } = this.props;
     // Functions
     const { openSnackbar,onNearbyShopsClick } = this.props;
 
     return (
-      <HashRouter basename='/'>
+      <BrowserRouter basename={process.env.PUBLIC_URL+'/'}>
         {bar}
 
         <Switch>
           <Route path="/" exact>
             <HomePage user={user} openSnackbar={openSnackbar} searchField={searchfield} onNearbyShopsClick={onNearbyShopsClick}/>
-            <Redirect from="/home" to="/"/>
           </Route>
           <Route path="/user/:userId">
-            {user ? <UserPage /> : <Redirect to="/" />}
+            {user ? <UserPage onProfileOpen={onProfileOpen} /> : <Redirect to="/" />}
           </Route>
 
           <Route>
             <NotFoundPage />
           </Route>
-
+            
+         
         </Switch>
-      </HashRouter>
+      </BrowserRouter>
     );
   }
 }
