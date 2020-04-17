@@ -19,9 +19,7 @@ import Page3 from './Page3'
 import Page4 from './Page4'
 import {Route,Switch,Link} from 'react-router-dom'
 import { withStyles } from '@material-ui/styles';
-import { BrowserRouter, HashRouter } from 'react-router-dom/cjs/react-router-dom.min';
-
-
+import {  HashRouter } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 
@@ -99,8 +97,7 @@ function TabPanel(props) {
     render(){
       const {classes,
         onNearbyShopsClick,
-        user,
-      
+        shops
       } = this.props;
       const handleChange = (event, newValue) => {
         this.setState({value:newValue})
@@ -112,7 +109,7 @@ function TabPanel(props) {
          <React.Fragment>
            <Route exact path="/">
            <TabPanel value={this.state.value} index={0} >
-            <Page1 classes ={classes}  onPage1Load={onNearbyShopsClick}/>
+            <Page1 classes ={classes}  onPage1Load={onNearbyShopsClick} shops={shops}/>
             </TabPanel>
            </Route>
           
@@ -141,7 +138,9 @@ function TabPanel(props) {
 
             </TabPanel>
             </Route>  
-            
+            <Route path="/form/:formid">
+
+            </Route>
           <CssBaseline />
           
           <AppBar  position="fixed" color="primary" className={classes.appBar}>
@@ -164,5 +163,8 @@ function TabPanel(props) {
       );
     }
   
+
 }
-export default withStyles(useStyles)(BottomAppBar);
+export default 
+  withStyles(useStyles)
+(BottomAppBar);

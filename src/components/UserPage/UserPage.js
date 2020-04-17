@@ -14,7 +14,6 @@ import EmptyState from "../EmptyState";
 
 import Loader from "../Loader";
 import UserCard from "../UserCard";
-import {useHistory} from 'react-router-dom'
 import { ReactComponent as ErrorIllustration } from "../../illustrations/error.svg";
 import { ReactComponent as NoDataIllustration } from "../../illustrations/no-data.svg";
 
@@ -31,7 +30,6 @@ function UserPage(props) {
   const [error, setError] = useState(null);
   const { userId } = useParams();
   const classes = useStyles();
-  const history = useHistory();
 const {onProfileOpen} = props
   useEffect(() => {
     onProfileOpen(0)

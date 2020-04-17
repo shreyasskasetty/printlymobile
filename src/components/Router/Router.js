@@ -8,9 +8,7 @@ import HomePage from "../HomePage";
 //import AdminPage from "../AdminPage";
 import UserPage from "../UserPage";
 import NotFoundPage from "../NotFoundPage";
-import Page1 from '../BottomAppBar/Page1'
-import Page2 from '../BottomAppBar/Page2'
-import {HashRouter, BrowserRouter } from "react-router-dom/cjs/react-router-dom.min";
+import {BrowserRouter } from "react-router-dom/cjs/react-router-dom.min";
 
 class Router extends Component {
   render() {

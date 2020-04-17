@@ -2,7 +2,7 @@
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import CallIcon from '@material-ui/icons/Call';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
-import React from "react";
+import React,{useState} from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -12,7 +12,7 @@ import Typography from "@material-ui/core/Typography"
 import PrintIcon from '@material-ui/icons/Print';
 import "./NearbyShopCard.css";
 import { IconButton } from '@material-ui/core';
-
+import TurnedInIcon from '@material-ui/icons/TurnedIn';
 const styles = muiBaseTheme => ({
   card: {
      minWidth : 250,
@@ -48,11 +48,34 @@ const styles = muiBaseTheme => ({
 });
 
 class NearbyShopCard extends React.Component{
-constructor(props){
-  super(props);
-  console.log(props);
-}
+  
+  constructor(props){
+    super(props)
+    this.state={
+      marked:false
+    }
+  }
+
   render(){
+    const toggleMark=(index)=>{
+      
+        this.setState({marked:!this.state.marked})
+        if(!this.state.marked)
+        {
+            console.log('Bookmarked shop: '+index)
+        }
+        else{
+          console.log('Bookmark removed');
+        }
+    }
+
+    const makeCall=(pno)=>{
+      // const args ={
+      //   number: pno,
+      //   promt: true
+      // }
+      // call(args).catch(console.error);
+    }
    const {classes} = this.props;
     return (
      
@@ -77,15 +100,15 @@ constructor(props){
              {this.props.shopinfo.address}
             </Typography>
             <Divider className={classes.divider} light />
-                <IconButton>
-                  <TurnedInNotIcon/>
+                <IconButton onClick={()=>{toggleMark(this.props.shopinfo.id)}}>
+                 {this.state.marked?<TurnedInIcon />:<TurnedInNotIcon />}
                 </IconButton>
                 <IconButton>
                   <LocationOnIcon/>
                 </IconButton>
-                <IconButton>
+                <a href="tel:+917338044932" style={{textDecoration:'none',color:'grey',position:'relative' ,margin:5,top:9}}>
                   <CallIcon />
-                </IconButton>
+                </a>
                 <IconButton >
                   <PrintIcon/>
                 </IconButton>

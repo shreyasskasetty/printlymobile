@@ -154,7 +154,7 @@ class Bar extends Component {
             }
             else{
               component=(
-                <ListItem button key={index} onClick={()=>{item.onClick()}} component={Link}>
+                <ListItem button key={index} onClick={()=>{item.onClick()}} >
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.name} />
                 </ListItem>
@@ -187,7 +187,10 @@ class Bar extends Component {
     return (
       <AppBar color="primary" position="static">
         <Toolbar>
-          {this.props.backButton?<IconButton onClick={onBackClick} ><ArrowBackIcon /></IconButton>:
+          {this.props.backButton?<Box display="flex" flexGrow={1} m={1}>
+            <IconButton  onClick={onBackClick} ><ArrowBackIcon /></IconButton>
+            </Box>
+            :
           <Box display="flex" flexGrow={1} m={1}>
             <Typography color="inherit" variant="h6">
               {process.env.REACT_APP_TITLE}

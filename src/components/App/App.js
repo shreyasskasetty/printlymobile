@@ -241,7 +241,7 @@ class App extends Component {
   };
 
   setBackButton = (i)=>{
-    if(i==0)
+    if(i===0)
     this.setState({backButton:true});
     else
     this.setState({backButton:false})
