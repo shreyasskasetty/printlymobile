@@ -13,9 +13,10 @@ import PrintIcon from '@material-ui/icons/Print';
 import "./NearbyShopCard.css";
 import { IconButton } from '@material-ui/core';
 import TurnedInIcon from '@material-ui/icons/TurnedIn';
+import {Link} from 'react-router-dom'
 const styles = muiBaseTheme => ({
   card: {
-     minWidth : 250,
+     width : 280,
     transition: "0.3s",
     boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
     "&:hover": {
@@ -69,13 +70,6 @@ class NearbyShopCard extends React.Component{
         }
     }
 
-    const makeCall=(pno)=>{
-      // const args ={
-      //   number: pno,
-      //   promt: true
-      // }
-      // call(args).catch(console.error);
-    }
    const {classes} = this.props;
     return (
      
@@ -106,11 +100,11 @@ class NearbyShopCard extends React.Component{
                 <IconButton>
                   <LocationOnIcon/>
                 </IconButton>
-                <a href="tel:+917338044932" style={{textDecoration:'none',color:'grey',position:'relative' ,margin:5,top:9}}>
+                <a href={`tel:${this.props.shopinfo.phoneno}`} style={{textDecoration:'none',color:'grey',position:'relative' ,margin:5,top:9}}>
                   <CallIcon />
                 </a>
-                <IconButton >
-                  <PrintIcon/>
+                <IconButton component={Link} to={`/shop/${this.props.shopinfo.id}`}>
+                  <PrintIcon />
                 </IconButton>
           </CardContent>
         </Card>

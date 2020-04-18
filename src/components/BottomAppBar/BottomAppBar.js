@@ -21,7 +21,7 @@ import {Route,Switch,Link} from 'react-router-dom'
 import { withStyles } from '@material-ui/styles';
 import {  HashRouter } from 'react-router-dom/cjs/react-router-dom.min';
 
-
+import PrintForm from "../PrintForm";
 
 
 const useStyles = theme=>({
@@ -91,8 +91,12 @@ function TabPanel(props) {
     constructor(props){
       super(props);
       this.state={
-        value:0
+        value:0,
+        barVisibility: true,
       }
+    }
+    componentDidMount(){
+      this.setState({barVisibility:true})
     }
     render(){
       const {classes,
@@ -102,7 +106,6 @@ function TabPanel(props) {
       const handleChange = (event, newValue) => {
         this.setState({value:newValue})
       };
-    
       return (
        <HashRouter basename="/">
          <Switch>
@@ -138,24 +141,25 @@ function TabPanel(props) {
 
             </TabPanel>
             </Route>  
-            <Route path="/form/:formid">
-
+            <Route path="/shop/:shopId">
+              <PrintForm setVisibility={(i)=>{i===0?this.setState({barVisibility:false}):this.setState({barVisibility:true})}}/>
             </Route>
           <CssBaseline />
           
-          <AppBar  position="fixed" color="primary" className={classes.appBar}>
+          {this.state.barVisibility && <AppBar  position="fixed" color="primary" className={classes.appBar}>
           <Tabs
             variant="fullWidth"
               value={this.state.value}
               onChange={handleChange}
             >
               <Tab  icon={<LocationOnIcon />}  component={Link} to="/" aria-label="phone" {...a11yProps(0)} />
-              <Tab  icon={<FavoriteIcon />} component={Link} to="favourite" aria-label="favorite" {...a11yProps(1)} />
-              <Tab icon={<PersonPinIcon />} component={Link} to="page3" aria-label="person" {...a11yProps(2)} />
-              <Tab icon={<HistoryIcon />} component={Link} to="orderhistory"aria-label="help" {...a11yProps(3)} />
-              <Tab icon={<QueryBuilderIcon />} component={Link} to="orderstatus" aria-label="shopping" {...a11yProps(4)} />
+              <Tab  icon={<FavoriteIcon />} component={Link} to="/favourite" aria-label="favorite" {...a11yProps(1)} />
+              <Tab icon={<PersonPinIcon />} component={Link} to="/page3" aria-label="person" {...a11yProps(2)} />
+              <Tab icon={<HistoryIcon />} component={Link} to="/orderhistory"aria-label="help" {...a11yProps(3)} />
+              <Tab icon={<QueryBuilderIcon />} component={Link} to="/orderstatus" aria-label="shopping" {...a11yProps(4)} />
             </Tabs>
           </AppBar>
+    }
         </React.Fragment>
          </Switch>
              

@@ -28,7 +28,6 @@ class Router extends Component {
           <Route path="/user/:userId">
             {user ? <UserPage onProfileOpen={onProfileOpen} /> : <Redirect to="/" />}
           </Route>
-
           <Route>
             <NotFoundPage />
           </Route>

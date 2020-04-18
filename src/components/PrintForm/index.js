@@ -1,1 +1,1 @@
-export {default} from './PrintFrom'
+export {default} from './PrintForm'
