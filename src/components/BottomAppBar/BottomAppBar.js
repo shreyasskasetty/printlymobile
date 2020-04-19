@@ -111,7 +111,7 @@ function TabPanel(props) {
         this.setState({shopId:shopId})
       }
       return (
-       <BrowserRouter basename="/">
+       <BrowserRouter basename={process.env.PUBLIC_URL+'/'}>
          <Switch>
          <React.Fragment>
            <Route exact path="/">
