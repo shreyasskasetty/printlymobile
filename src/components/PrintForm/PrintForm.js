@@ -1,26 +1,28 @@
 import React, { Component } from 'react'
 import PrintSpecifation from "./PrintSpecifation";
-import { FileUpload } from "./FileUpload";
+import FileUpload  from "./FileUpload";
+import axios from "axios";
 class PrintForm extends Component {
     constructor(props){
         super(props)
         this.state={
-            step:2,
-            filename:'',
+            step:1,
+            file: null,
             downloadLink:'',
-            noCopies: 0,
-            singleSided: false,
-            backToBack:false,
-            noPagesPerSide:0,
-            color:{isSet:false,},
-            blackWhite:{isSet:true},
+            noCopies: 1,
+            printType:'SINGLE_SIDED',
+            noPagesPerSide:1,
+            ink:'BLACK_WHITE',
             pgStart:0,
             pgEnd:0,
-            allPages:false,
-            pageSize:'',
-            pageOrientation:'',
-            extraComment:''
+            allPages:true,
+            pageSize:'A4',
+            pageOrientation:'PORTRAIT',
+            extraComment:'',
+            progress:0,
         }
+       
+        
     }
     componentDidMount(){
        const {setVisibility} =this.props
@@ -48,17 +50,22 @@ class PrintForm extends Component {
             [input]:e.target.value
         })
     }
-    render() {
-        const {step} = this.state;
+    saveFile=(files)=>{
+        console.log(files[0])
+        this.setState({
+            file:files[0]
+        })
+    }
+
+
+    fileUploadHandler=()=>{
+        const {shopId}=this.props
         const {
-            filename,
-            downloadLink,
+            file,
             noCopies,
-            singleSided,
-            backToBack,
+            printType,
             noPagesPerSide,
-            color,
-            blackWhite,
+            ink,
             pgStart,
             pgEnd,
             allPages,
@@ -66,18 +73,64 @@ class PrintForm extends Component {
             pageOrientation,
             extraComment,
         }= this.state;
+        const fd = new FormData();
+        console.log(shopId.id)
+       try{
+        fd.append('file',file,file.name)
+       }catch(err){
+           console.log(err)
+       }
+        fd.append('shopId',shopId.id)
+        fd.append('noCopies',noCopies)
+        fd.append('printType',printType)
+        fd.append('noPagesPerSide',noPagesPerSide)
+        fd.append('ink',ink)
+        fd.append('pgStart',pgStart)
+        fd.append('pgEnd',pgEnd)
+        fd.append('allPages',allPages)
+        fd.append('pageSize',pageSize)
+        fd.append('pageOrientation',pageOrientation)
+        fd.append('extraComment',extraComment)
+        console.log(fd)
+        let progress=0
+        axios.post('https://us-central1-printly-3ea29.cloudfunctions.net/uploadFile',fd,{
+            onUploadProgress: progressEvent=>{
+               progress=Math.round(progressEvent.loaded/progressEvent.total*100)
+               this.setState({progress:progress});
+            }
+        })
+        .then(res=>{
+            console.log(res)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+    render() {
+        const {step} = this.state;
 
+        const {
+            files,
+            noCopies,
+            printType,
+            noPagesPerSide,
+            ink,
+            pgStart,
+            pgEnd,
+            allPages,
+            pageSize,
+            pageOrientation,
+            extraComment,
+            progress
+        }= this.state;
         const fileUploadValues={
-            filename,
-            downloadLink, 
+            files,
+            progress 
         }
         const printSpecificationValues={
             noCopies,
-            singleSided,
-            backToBack,
+            printType,
             noPagesPerSide,
-            color,
-            blackWhite,
+            ink,
             pgStart,
             pgEnd,
             allPages,
@@ -89,19 +142,24 @@ class PrintForm extends Component {
             case 1:
                 console.log('successful')
                 return(
-                    <FileUpload 
-                    nextStep = {this.nextStep}
-                    handleChange={this.handleChange}
-                    values={fileUploadValues}/>   
-                )
-            case 2: 
-                return(
+                  
                     <PrintSpecifation 
                     nextStep={this.nextStep}
                     handleChange={this.handleChange}
                     values={printSpecificationValues}
+                    
+                    /> 
+                )
+            case 2: 
+                return(
+                    <FileUpload 
+                    nextStep = {this.nextStep}
+                    fileUploadHandler={this.fileUploadHandler}
+                    handleChange={this.saveFile}
+                    values={fileUploadValues}
                     prevStep={this.prevStep}
-                    />
+                    />  
+                    
                 )
         }
     }

@@ -12,7 +12,7 @@ export class Page1 extends Component {
         onPage1Load(0);
     }
     render() {
-      const{ shops} = this.props;
+      const{ shops,handleShopId} = this.props;
         const classes = this.props.classes;
         if(!isLoaded)
         {
@@ -25,7 +25,7 @@ export class Page1 extends Component {
             {
                 shops.map(({id, shopname, address, img, phoneno}) => (
                   <Box key={id} m={2}>
-                  <NearbyShopCard shopinfo={{id,shopname,address,img,phoneno}}/>
+                  <NearbyShopCard shopinfo={{id,shopname,address,img,phoneno}} handleShopId={handleShopId}/>
                   </Box>
                  
               ))}

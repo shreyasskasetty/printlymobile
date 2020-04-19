@@ -70,7 +70,10 @@ class NearbyShopCard extends React.Component{
         }
     }
 
-   const {classes} = this.props;
+   const {classes,handleShopId} = this.props;
+   const handleChange=()=>{
+     handleShopId(this.props.shopinfo)
+   }
     return (
      
       <div className="App">
@@ -103,7 +106,7 @@ class NearbyShopCard extends React.Component{
                 <a href={`tel:${this.props.shopinfo.phoneno}`} style={{textDecoration:'none',color:'grey',position:'relative' ,margin:5,top:9}}>
                   <CallIcon />
                 </a>
-                <IconButton component={Link} to={`/shop/${this.props.shopinfo.id}`}>
+                <IconButton onClick={handleChange} component={Link} to={`/shop/${this.props.shopinfo.id}`}>
                   <PrintIcon />
                 </IconButton>
           </CardContent>

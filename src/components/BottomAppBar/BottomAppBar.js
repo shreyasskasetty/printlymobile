@@ -19,7 +19,7 @@ import Page3 from './Page3'
 import Page4 from './Page4'
 import {Route,Switch,Link} from 'react-router-dom'
 import { withStyles } from '@material-ui/styles';
-import {  HashRouter } from 'react-router-dom/cjs/react-router-dom.min';
+import {  BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
 
 import PrintForm from "../PrintForm";
 
@@ -93,7 +93,9 @@ function TabPanel(props) {
       this.state={
         value:0,
         barVisibility: true,
+        shopId:'',
       }
+     
     }
     componentDidMount(){
       this.setState({barVisibility:true})
@@ -101,18 +103,20 @@ function TabPanel(props) {
     render(){
       const {classes,
         onNearbyShopsClick,
-        shops
       } = this.props;
       const handleChange = (event, newValue) => {
         this.setState({value:newValue})
       };
+      const handleShopId = (shopId)=>{
+        this.setState({shopId:shopId})
+      }
       return (
-       <HashRouter basename="/">
+       <BrowserRouter basename="/">
          <Switch>
          <React.Fragment>
            <Route exact path="/">
            <TabPanel value={this.state.value} index={0} >
-            <Page1 classes ={classes}  onPage1Load={onNearbyShopsClick} shops={shops}/>
+            <Page1 classes ={classes}  onPage1Load={onNearbyShopsClick}  handleShopId={handleShopId}/>
             </TabPanel>
            </Route>
           
@@ -142,7 +146,7 @@ function TabPanel(props) {
             </TabPanel>
             </Route>  
             <Route path="/shop/:shopId">
-              <PrintForm setVisibility={(i)=>{i===0?this.setState({barVisibility:false}):this.setState({barVisibility:true})}}/>
+              <PrintForm setVisibility={(i)=>{i===0?this.setState({barVisibility:false}):this.setState({barVisibility:true})}} shopId={this.state.shopId}/>
             </Route>
           <CssBaseline />
           
@@ -163,7 +167,7 @@ function TabPanel(props) {
         </React.Fragment>
          </Switch>
              
-        </HashRouter>
+        </BrowserRouter>
       );
     }
   
