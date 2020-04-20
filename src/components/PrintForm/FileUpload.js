@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Link } from "react-router-dom";
+
 import { 
     Paper,
     Button,
@@ -22,6 +24,7 @@ import {
      },
 
  })
+
  const BorderLinearProgress = withStyles({
     root: {
       height: 10,
@@ -65,14 +68,14 @@ class FileUpload extends Component {
                   Back
                 </Button>
                 </Grid>
-                <Grid xs={5} sm={5} item>
+                {/* <Grid xs={5} sm={5} item>
                     <Button variant="contained" color="primary">
                       Next
                     </Button>
-                </Grid>
+                </Grid> */}
                 <Grid xs={3} sm={3} item>
                     <Button variant="contained" color="primary" onClick={fileUploadHandler}>
-                      Upload
+                      Order Print
                     </Button>
                 </Grid>
                 </Grid>

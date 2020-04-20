@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import PrintSpecifation from "./PrintSpecifation";
 import FileUpload  from "./FileUpload";
 import axios from "axios";
+import { renderBackButton ,removeBackButton,removeBottomBar,renderBottomBar} from "../Actions/componentActions";
+import { connect } from "react-redux";
+import { createBrowserHistory } from 'history';
+const history=createBrowserHistory()
 class PrintForm extends Component {
     constructor(props){
         super(props)
@@ -25,12 +29,12 @@ class PrintForm extends Component {
         
     }
     componentDidMount(){
-       const {setVisibility} =this.props
-       setVisibility(0)
+      this.props.renderBackButton()
+      this.props.removeBottomBar()
     }
     componentWillUnmount(){
-        const {setVisibility} =this.props
-        setVisibility(1)
+        this.props.removeBackButton()
+        this.props.renderBottomBar()
     }
     nextStep=()=>{
         const {step} = this.state;
@@ -101,6 +105,9 @@ class PrintForm extends Component {
         })
         .then(res=>{
             console.log(res)
+            
+            history.goBack()
+            history.push('/')
         }).catch(err=>{
             console.log(err)
         })
@@ -164,5 +171,12 @@ class PrintForm extends Component {
         }
     }
 }
-
-export default PrintForm
+const  mapDispatchToProps=(dispatch)=>{
+    return {
+        renderBackButton: ()=>dispatch(renderBackButton()),
+        removeBackButton: ()=>dispatch(removeBackButton()),
+        removeBottomBar: ()=>dispatch(removeBottomBar()),
+        renderBottomBar: ()=>dispatch(renderBottomBar())
+    }
+}
+export default connect(null,mapDispatchToProps)(PrintForm)

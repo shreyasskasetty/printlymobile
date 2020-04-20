@@ -18,8 +18,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import { Link } from "react-router-dom";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { createBrowserHistory } from 'history';
-
-
+import {connect} from 'react-redux'
+import {compose} from 'redux'
 import {
   AppBar,
   Toolbar,
@@ -89,7 +89,7 @@ class Bar extends Component {
 
   render() {
     // // Properties
-    const { performingAction, user, userData, roles, onProfileOpen } = this.props;
+    const { performingAction, user, userData, roles } = this.props;
     const {classes} = this.props
     const toggleDrawer = (anchor, open) => (event) => {
       if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -132,6 +132,9 @@ class Bar extends Component {
         icon: <ExitToAppIcon/>
       }
     ];
+    const handleClick=()=>{
+      history.goBack()
+    }
     const list = (anchor) => (
       <div
         className={clsx( classes.list, {
@@ -180,15 +183,11 @@ class Bar extends Component {
     // const { menu } = this.state;
 
     const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
-    const onBackClick=()=>{
-      onProfileOpen(1);
-      history.goBack()
-    }
     return (
       <AppBar color="primary" position="static">
         <Toolbar>
           {this.props.backButton?<Box display="flex" flexGrow={1} m={1}>
-            <IconButton  onClick={onBackClick} ><ArrowBackIcon /></IconButton>
+            <IconButton onClick={handleClick}><ArrowBackIcon /></IconButton>
             </Box>
             :
           <Box display="flex" flexGrow={1} m={1}>
@@ -279,4 +278,12 @@ Bar.propTypes = {
   onSignOutClick: PropTypes.func.isRequired
 };
 
-export default withStyles(useStyles)(Bar);
+const mapStateToProps=(state)=>{
+  return {
+    backButton:state.componentState.backButton
+  }
+}
+export default compose(
+  connect(mapStateToProps),
+  withStyles(useStyles)
+)(Bar);

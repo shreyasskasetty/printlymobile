@@ -20,7 +20,8 @@ import Page4 from './Page4'
 import {Route,Switch,Link} from 'react-router-dom'
 import { withStyles } from '@material-ui/styles';
 import {  BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
-
+import {connect} from 'react-redux'
+import {compose} from 'redux'
 import PrintForm from "../PrintForm";
 
 
@@ -92,13 +93,9 @@ function TabPanel(props) {
       super(props);
       this.state={
         value:0,
-        barVisibility: true,
         shopId:'',
       }
      
-    }
-    componentDidMount(){
-      this.setState({barVisibility:true})
     }
     render(){
       const {classes,
@@ -146,11 +143,11 @@ function TabPanel(props) {
             </TabPanel>
             </Route>  
             <Route path="/shop/:shopId">
-              <PrintForm setVisibility={(i)=>{i===0?this.setState({barVisibility:false}):this.setState({barVisibility:true})}} shopId={this.state.shopId}/>
+              <PrintForm  shopId={this.state.shopId}/>
             </Route>
           <CssBaseline />
           
-          {this.state.barVisibility && <AppBar  position="fixed" color="primary" className={classes.appBar}>
+          {this.props.barVisibility && <AppBar  position="fixed" color="primary" className={classes.appBar}>
           <Tabs
             variant="fullWidth"
               value={this.state.value}
@@ -173,6 +170,12 @@ function TabPanel(props) {
   
 
 }
-export default 
+const mapStateToProps=(state)=>{
+  return {
+    barVisibility: state.componentState.bottomBar
+  }
+}
+export default compose(
+  connect(mapStateToProps),
   withStyles(useStyles)
-(BottomAppBar);
+)(BottomAppBar);
