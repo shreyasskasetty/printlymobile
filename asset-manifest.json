@@ -1,19 +1,14 @@
 {
   "files": {
-    "main.css": "/printlymobile/static/css/main.f94b7fd9.chunk.css",
-    "main.js": "/printlymobile/static/js/main.de4aa957.chunk.js",
-    "main.js.map": "/printlymobile/static/js/main.de4aa957.chunk.js.map",
+    "main.css": "/printlymobile/static/css/main.d5004d31.chunk.css",
+    "main.js": "/printlymobile/static/js/main.7824fbc8.chunk.js",
     "runtime-main.js": "/printlymobile/static/js/runtime-main.2debe08f.js",
-    "runtime-main.js.map": "/printlymobile/static/js/runtime-main.2debe08f.js.map",
-    "static/css/2.fe007f4c.chunk.css": "/printlymobile/static/css/2.fe007f4c.chunk.css",
-    "static/js/2.b19a95e0.chunk.js": "/printlymobile/static/js/2.b19a95e0.chunk.js",
-    "static/js/2.b19a95e0.chunk.js.map": "/printlymobile/static/js/2.b19a95e0.chunk.js.map",
+    "static/css/2.0f2c0294.chunk.css": "/printlymobile/static/css/2.0f2c0294.chunk.css",
+    "static/js/2.a39e5819.chunk.js": "/printlymobile/static/js/2.a39e5819.chunk.js",
     "index.html": "/printlymobile/index.html",
-    "precache-manifest.32af72d03dbeca603844502e7887bf5c.js": "/printlymobile/precache-manifest.32af72d03dbeca603844502e7887bf5c.js",
+    "precache-manifest.4831a09f8c786181acdc8ff451ea01d9.js": "/printlymobile/precache-manifest.4831a09f8c786181acdc8ff451ea01d9.js",
     "service-worker.js": "/printlymobile/service-worker.js",
-    "static/css/2.fe007f4c.chunk.css.map": "/printlymobile/static/css/2.fe007f4c.chunk.css.map",
-    "static/css/main.f94b7fd9.chunk.css.map": "/printlymobile/static/css/main.f94b7fd9.chunk.css.map",
-    "static/js/2.b19a95e0.chunk.js.LICENSE.txt": "/printlymobile/static/js/2.b19a95e0.chunk.js.LICENSE.txt",
+    "static/js/2.a39e5819.chunk.js.LICENSE.txt": "/printlymobile/static/js/2.a39e5819.chunk.js.LICENSE.txt",
     "static/media/error.5446a452.svg": "/printlymobile/static/media/error.5446a452.svg",
     "static/media/insert-block.8e87797e.svg": "/printlymobile/static/media/insert-block.8e87797e.svg",
     "static/media/no-data.f9b088ce.svg": "/printlymobile/static/media/no-data.f9b088ce.svg",
@@ -22,9 +17,9 @@
   },
   "entrypoints": [
     "static/js/runtime-main.2debe08f.js",
-    "static/css/2.fe007f4c.chunk.css",
-    "static/js/2.b19a95e0.chunk.js",
-    "static/css/main.f94b7fd9.chunk.css",
-    "static/js/main.de4aa957.chunk.js"
+    "static/css/2.0f2c0294.chunk.css",
+    "static/js/2.a39e5819.chunk.js",
+    "static/css/main.d5004d31.chunk.css",
+    "static/js/main.7824fbc8.chunk.js"
   ]
 }
