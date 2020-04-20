@@ -23,8 +23,9 @@ import {  BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
 import {connect} from 'react-redux'
 import {compose} from 'redux'
 import PrintForm from "../PrintForm";
-
-
+import readingTime from "reading-time";
+import { Snackbar } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
 const useStyles = theme=>({
     text: {
       textAlign:"center",
@@ -94,13 +95,83 @@ function TabPanel(props) {
       this.state={
         value:0,
         shopId:'',
+        snackbarSuccess: {
+          autoHideDuration: 0,
+          message: "",
+          open: false
+        },
+      snackbarError: {
+          autoHideDuration: 0,
+          message: "",
+          open: false
+        }
       }
      
     }
+    openSnackbarSuccess = (message, autoHideDuration = 2, callback) => {
+      this.setState(
+        {
+          snackbarSuccess: {
+            autoHideDuration: readingTime(message).time * autoHideDuration,
+            message,
+            open: true
+          }
+        },
+        () => {
+          if (callback && typeof callback === "function") {
+            callback();
+          }
+        }
+      );
+    };
+
+    openSnackbarError = (message, autoHideDuration = 2, callback) => {
+      this.setState(
+        {
+          snackbarError: {
+            autoHideDuration: readingTime(message).time * autoHideDuration,
+            message,
+            open: true
+          }
+        },
+        () => {
+          if (callback && typeof callback === "function") {
+            callback();
+          }
+        }
+      );
+    };
+    
+    closeSnackbar = (clearMessage = false) => {
+      const { snackbarSuccess,snackbarError } = this.state;
+      if(snackbarSuccess.open)
+      this.setState({
+        snackbarSuccess: {
+          message: clearMessage ? "" : snackbarSuccess.message,
+          open: false
+        }
+      });
+      if(snackbarError)
+      this.setState({
+          snackbarError: {
+            message: clearMessage ? "" : snackbarError.message,
+            open: false
+          }
+        });
+
+    };
     render(){
+      function Alert(props) {
+        return <MuiAlert elevation={6} variant="filled" {...props} />;
+      }
       const {classes,
         onNearbyShopsClick,
+        user,
       } = this.props;
+      const {
+        snackbarSuccess,
+        snackbarError
+      }=this.state
       const handleChange = (event, newValue) => {
         this.setState({value:newValue})
       };
@@ -113,7 +184,9 @@ function TabPanel(props) {
          <React.Fragment>
            <Route exact path="/">
            <TabPanel value={this.state.value} index={0} >
-            <Page1 classes ={classes}  onPage1Load={onNearbyShopsClick}  handleShopId={handleShopId}/>
+            <Page1 classes ={classes}  
+              onPage1Load={onNearbyShopsClick}
+             handleShopId={handleShopId}/>
             </TabPanel>
            </Route>
           
@@ -143,7 +216,8 @@ function TabPanel(props) {
             </TabPanel>
             </Route>  
             <Route path="/shop/:shopId">
-              <PrintForm  shopId={this.state.shopId}/>
+              <PrintForm  shopId={this.state.shopId}openSnackbarError={this.openSnackbarError} 
+                openSnackbarSuccess={this.openSnackbarSuccess} user={user} />
             </Route>
           <CssBaseline />
           
@@ -163,7 +237,26 @@ function TabPanel(props) {
     }
         </React.Fragment>
          </Switch>
-             
+         <Snackbar
+            autoHideDuration={snackbarSuccess.autoHideDuration}
+            message={snackbarSuccess.message}
+            open={snackbarSuccess.open}
+            onClose={this.closeSnackbar}
+            >
+                <Alert onClose={this.closeSnackbar} severity="success">
+                    {snackbarSuccess.message}
+                </Alert>
+        </Snackbar> 
+        <Snackbar
+                        autoHideDuration={snackbarError.autoHideDuration}
+                        message={snackbarError.message}
+                        open={snackbarError.open}
+                        onClose={this.closeSnackbar}
+                        >
+                            <Alert onClose={this.closeSnackbar} severity="error">
+                                 {snackbarError.message}
+                            </Alert>
+                    </Snackbar> 
         </BrowserRouter>
       );
     }

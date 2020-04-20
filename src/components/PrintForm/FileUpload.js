@@ -73,7 +73,7 @@ class FileUpload extends Component {
                       Next
                     </Button>
                 </Grid> */}
-                <Grid xs={3} sm={3} item>
+                <Grid xs={5} sm={3} item>
                     <Button variant="contained" color="primary" onClick={fileUploadHandler}>
                       Order Print
                     </Button>

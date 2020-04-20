@@ -30,9 +30,7 @@ function UserPage(props) {
   const [error, setError] = useState(null);
   const { userId } = useParams();
   const classes = useStyles();
-const {onProfileOpen} = props
   useEffect(() => {
-    onProfileOpen(0)
     return firestore
       .collection("users")
       .doc(userId)

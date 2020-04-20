@@ -5,6 +5,9 @@ import axios from "axios";
 import { renderBackButton ,removeBackButton,removeBottomBar,renderBottomBar} from "../Actions/componentActions";
 import { connect } from "react-redux";
 import { createBrowserHistory } from 'history';
+import { CssBaseline,Snackbar } from '@material-ui/core';
+
+import MuiAlert from '@material-ui/lab/Alert';
 const history=createBrowserHistory()
 class PrintForm extends Component {
     constructor(props){
@@ -24,10 +27,12 @@ class PrintForm extends Component {
             pageOrientation:'PORTRAIT',
             extraComment:'',
             progress:0,
+            
         }
        
         
     }
+
     componentDidMount(){
       this.props.renderBackButton()
       this.props.removeBottomBar()
@@ -61,9 +66,9 @@ class PrintForm extends Component {
         })
     }
 
-
+     
     fileUploadHandler=()=>{
-        const {shopId}=this.props
+        const {shopId,user}=this.props
         const {
             file,
             noCopies,
@@ -84,6 +89,9 @@ class PrintForm extends Component {
        }catch(err){
            console.log(err)
        }
+        fd.append('userId',user.uid)
+        fd.append('filename',file.name)
+        fd.append('username',`${user.firstName} ${user.lastName}`)
         fd.append('shopId',shopId.id)
         fd.append('noCopies',noCopies)
         fd.append('printType',printType)
@@ -100,19 +108,23 @@ class PrintForm extends Component {
         axios.post('https://us-central1-printly-3ea29.cloudfunctions.net/uploadFile',fd,{
             onUploadProgress: progressEvent=>{
                progress=Math.round(progressEvent.loaded/progressEvent.total*100)
+               if(file)
                this.setState({progress:progress});
             }
         })
         .then(res=>{
             console.log(res)
-            
+            if(res)
+                this.props.openSnackbarSuccess("Order Placed Successfuly")
             history.goBack()
             history.push('/')
         }).catch(err=>{
             console.log(err)
+            this.props.openSnackbarError("Upload the file")
         })
     }
     render() {
+          
         const {step} = this.state;
 
         const {
@@ -127,7 +139,8 @@ class PrintForm extends Component {
             pageSize,
             pageOrientation,
             extraComment,
-            progress
+            progress,
+           
         }= this.state;
         const fileUploadValues={
             files,
@@ -151,23 +164,29 @@ class PrintForm extends Component {
                 return(
                   
                     <PrintSpecifation 
-                    nextStep={this.nextStep}
-                    handleChange={this.handleChange}
-                    values={printSpecificationValues}
-                    
+                        nextStep={this.nextStep}
+                        handleChange={this.handleChange}
+                        values={printSpecificationValues}
+
                     /> 
                 )
             case 2: 
                 return(
+                    <>
                     <FileUpload 
                     nextStep = {this.nextStep}
                     fileUploadHandler={this.fileUploadHandler}
                     handleChange={this.saveFile}
                     values={fileUploadValues}
                     prevStep={this.prevStep}
-                    />  
+                    /> 
                     
+                   
+                    </>
                 )
+            default: return(
+                <CssBaseline />
+            )
         }
     }
 }
