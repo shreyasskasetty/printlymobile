@@ -2,7 +2,7 @@
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import CallIcon from '@material-ui/icons/Call';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
-import React,{useState} from "react";
+import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";

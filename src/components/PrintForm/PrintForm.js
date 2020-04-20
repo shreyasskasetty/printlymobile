@@ -5,9 +5,9 @@ import axios from "axios";
 import { renderBackButton ,removeBackButton,removeBottomBar,renderBottomBar} from "../Actions/componentActions";
 import { connect } from "react-redux";
 import { createBrowserHistory } from 'history';
-import { CssBaseline,Snackbar } from '@material-ui/core';
+import { CssBaseline } from '@material-ui/core';
 
-import MuiAlert from '@material-ui/lab/Alert';
+
 const history=createBrowserHistory()
 class PrintForm extends Component {
     constructor(props){
@@ -89,9 +89,13 @@ class PrintForm extends Component {
        }catch(err){
            console.log(err)
        }
+
         fd.append('userId',user.uid)
+        if(file)
+        {
         fd.append('filename',file.name)
         fd.append('username',`${user.firstName} ${user.lastName}`)
+        }
         fd.append('shopId',shopId.id)
         fd.append('noCopies',noCopies)
         fd.append('printType',printType)

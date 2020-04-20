@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-import { Link } from "react-router-dom";
 
 import { 
     Paper,
     Button,
     Grid,
-    Divider,
     LinearProgress
 } from '@material-ui/core'
 import { 
@@ -37,7 +35,7 @@ import {
   })(LinearProgress);
 class FileUpload extends Component {
     render() {
-        const {values,fileUploadHandler,handleChange,nextStep,prevStep,classes}=this.props
+        const {values,fileUploadHandler,handleChange,prevStep,classes}=this.props
         return (
             <React.Fragment>
                 <Paper className={classes.root}>
@@ -68,11 +66,6 @@ class FileUpload extends Component {
                   Back
                 </Button>
                 </Grid>
-                {/* <Grid xs={5} sm={5} item>
-                    <Button variant="contained" color="primary">
-                      Next
-                    </Button>
-                </Grid> */}
                 <Grid xs={5} sm={3} item>
                     <Button variant="contained" color="primary" onClick={fileUploadHandler}>
                       Order Print

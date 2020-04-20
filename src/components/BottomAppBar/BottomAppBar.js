@@ -1,5 +1,4 @@
 import React from 'react';
-//import { createStyles,  makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,7 +14,6 @@ import Paper from '@material-ui/core/Paper';
 import HistoryIcon from '@material-ui/icons/History';
 import Page1 from './Page1'
 import Page2 from './Page2'
-import Page3 from './Page3'
 import Page4 from './Page4'
 import {Route,Switch,Link} from 'react-router-dom'
 import { withStyles } from '@material-ui/styles';
@@ -26,6 +24,8 @@ import PrintForm from "../PrintForm";
 import readingTime from "reading-time";
 import { Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
+import Tariff from '../Tariff/Tariff'
+
 const useStyles = theme=>({
     text: {
       textAlign:"center",
@@ -197,7 +197,7 @@ function TabPanel(props) {
             </Route>
             <Route exact path="/page3">
             <TabPanel value={this.state.value} index={2}>
-              <Page3 />
+             <Tariff />
             </TabPanel>
             </Route>  
             
