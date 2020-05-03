@@ -50,12 +50,12 @@ authentication.signUp = fields => {
         }
 
         const userDocumentReference = firestore.collection("users").doc(uid);
-
         userDocumentReference
           .set({
+            bookmarkedShops:['shop1'],
             firstName: firstName,
             lastName: lastName,
-            username: username
+            username: username,
           })
           .then(value => {
             analytics.logEvent("sign_up", {
@@ -110,7 +110,7 @@ authentication.signUpWithEmailAddressAndPassword = (emailAddress, password) => {
         const userDocumentReference = firestore.collection("users").doc(uid);
 
         userDocumentReference
-          .set({}, { merge: true })
+          .set({bookmarkedShops:['shop1']}, { merge: true })
           .then(value => {
             analytics.logEvent("sign_up", {
               method: "password"
@@ -174,7 +174,7 @@ authentication.signIn = (emailAddress, password) => {
               resolve(user);
             } else {
               userDocumentReference
-                .set({}, { merge: true })
+                .set({bookmarkedShops:['shop1']}, { merge: true })
                 .then(value => {
                   analytics.logEvent("login", {
                     method: "password"
@@ -304,7 +304,7 @@ authentication.signInWithAuthProvider = providerId => {
         }
 
         const userDocumentReference = firestore.collection("users").doc(uid);
-
+        
         userDocumentReference
           .get({ source: "server" })
           .then(value => {
@@ -316,7 +316,7 @@ authentication.signInWithAuthProvider = providerId => {
               resolve(user);
             } else {
               userDocumentReference
-                .set({}, { merge: true })
+                .set({bookmarkedShops:['shop1']}, { merge: true })
                 .then(value => {
                   analytics.logEvent("login", {
                     method: providerId
@@ -846,12 +846,16 @@ authentication.deleteAccount = () => {
 
       return;
     }
-
+      firestore.collection('users').doc(currentUser.uid).delete().then(function() {
+          console.log("Account Successfully deleted!");
+      }).catch(function(error) {
+          console.error("Error removing document: ", error);
+      });
+  
     currentUser
       .delete()
       .then(value => {
         analytics.logEvent("delete_account");
-
         resolve(value);
       })
       .catch(reason => {

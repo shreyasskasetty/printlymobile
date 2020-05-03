@@ -165,7 +165,6 @@ function TabPanel(props) {
         return <MuiAlert elevation={6} variant="filled" {...props} />;
       }
       const {classes,
-        onNearbyShopsClick,
         user,
       } = this.props;
       const {
@@ -184,15 +183,15 @@ function TabPanel(props) {
          <React.Fragment>
            <Route exact path="/">
            <TabPanel value={this.state.value} index={0} >
-            <Page1 classes ={classes}  
-              onPage1Load={onNearbyShopsClick}
+            <Page1 classes ={classes} 
+              user={user} 
              handleShopId={handleShopId}/>
             </TabPanel>
            </Route>
           
             <Route exact path="/favourite">
             <TabPanel value={this.state.value} index={1}>
-              <Page2 />
+              <Page2 classes ={classes} handleShopId={handleShopId} user={user} index={this.state.value}/>
             </TabPanel>
             </Route>
             <Route exact path="/page3">

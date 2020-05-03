@@ -14,6 +14,10 @@ import "./NearbyShopCard.css";
 import { IconButton } from '@material-ui/core';
 import TurnedInIcon from '@material-ui/icons/TurnedIn';
 import {Link} from 'react-router-dom'
+import {firestoreConnect} from 'react-redux-firebase'
+import {compose} from 'redux'
+import {connect} from 'react-redux'
+import {bookmarkShop,removeBookmark} from  '../Actions/bookmarkAction.js'
 const styles = muiBaseTheme => ({
   card: {
      width : 280,
@@ -56,16 +60,46 @@ class NearbyShopCard extends React.Component{
       marked:false
     }
   }
-
+  componentDidMount(){
+    const {users,user,shopinfo} = this.props;
+    var bookmarkedShops=[];
+    users.forEach(element => {
+      if(element.id === user.uid){
+        bookmarkedShops= element.bookmarkedShops
+      }
+    });
+    console.log(bookmarkedShops)
+      if(bookmarkedShops.includes(shopinfo.id) && !this.state.marked)
+      {
+          this.setState({marked:true});
+          bookmarkShop({
+            shopId:shopinfo.id,
+            uid:user.uid
+          })
+      }
+  }
   render(){
-    const toggleMark=(index)=>{
-      
-        this.setState({marked:!this.state.marked})
-        if(!this.state.marked)
-        {
-            console.log('Bookmarked shop: '+index)
+    const toggleMark=(id)=>{
+      const {user} = this.props
+      const {removeBookmark,bookmarkShop,shopinfo,users}=this.props
+      var bookmarkedShops=[];
+      users.forEach(element => {
+        if(element.id === user.uid){
+          bookmarkedShops= element.bookmarkedShops
         }
-        else{
+      });
+      console.log(bookmarkedShops)
+        if(!bookmarkedShops.includes(id) && !this.state.marked)
+        {
+            this.setState({marked:true});
+            bookmarkShop({
+              shopId:shopinfo.id,
+              uid:user.uid
+            })
+        }
+        else if(this.state.marked){
+          this.setState({marked:false});
+          removeBookmark({shopId:shopinfo.id,uid:user.uid})
           console.log('Bookmark removed');
         }
     }
@@ -97,9 +131,10 @@ class NearbyShopCard extends React.Component{
              {this.props.shopinfo.address}
             </Typography>
             <Divider className={classes.divider} light />
+                {(this.props.index!==1)? 
                 <IconButton onClick={()=>{toggleMark(this.props.shopinfo.id)}}>
                  {this.state.marked?<TurnedInIcon />:<TurnedInNotIcon />}
-                </IconButton>
+                </IconButton>:null}
                 <IconButton>
                   <LocationOnIcon/>
                 </IconButton>
@@ -116,5 +151,19 @@ class NearbyShopCard extends React.Component{
   }
   
 }
-
-export default withStyles(styles)(NearbyShopCard);
+const mapDispatchToProps=(dispatch)=>{
+  return {
+  removeBookmark:(markinfo)=>{dispatch(removeBookmark(markinfo))},
+  bookmarkShop:(markinfo)=>{dispatch(bookmarkShop(markinfo))}
+  }
+}
+const mapStateToProps=(state)=>{
+  return{
+    users:state.firestore.ordered.users?state.firestore.ordered.users:[]
+  }
+}
+export default compose(
+  withStyles(styles),
+  firestoreConnect([{collection:'users'}]),
+  connect(mapStateToProps,mapDispatchToProps)
+)(NearbyShopCard);

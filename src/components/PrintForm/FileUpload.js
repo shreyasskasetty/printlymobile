@@ -50,7 +50,7 @@ class FileUpload extends Component {
                     filesLimit={1}
                      onChange={handleChange}
                      showPreviews={true}
-                     maxFileSize={5000000}
+                     maxFileSize={50000000}
                      acceptedFiles={['image/jpeg', 'image/png','application/pdf','application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document']}
                  />
                 </Grid>

@@ -5,17 +5,18 @@ import "./index.css";
 import * as Sentry from "@sentry/browser";
 import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
-import { createStore} from 'redux'
+import { createStore,applyMiddleware} from 'redux'
+import thunk from "redux-thunk";
 import {Provider} from 'react-redux'
-import rootReducer,{initialState} from '../src/components/store/index'
-import {createFirestoreInstance} from 'redux-firestore'
-import {  ReactReduxFirebaseProvider} from 'react-redux-firebase';
+import rootReducer from '../src/components/store/index'
+import {createFirestoreInstance,getFirestore} from 'redux-firestore'
+import {  ReactReduxFirebaseProvider,getFirebase} from 'react-redux-firebase';
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore' // <- needed if using firestore
 
 
-const store = createStore(rootReducer,initialState);
+const store = createStore(rootReducer,applyMiddleware(thunk.withExtraArgument({getFirebase,getFirestore})));
 const rrfConfig = {
   userProfile: 'users',
   useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB

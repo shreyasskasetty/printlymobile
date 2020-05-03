@@ -7,10 +7,7 @@ import {firestoreConnect,isLoaded} from 'react-redux-firebase'
 import {compose} from 'redux'
 import {connect} from 'react-redux'
 export class Page1 extends Component {
-    componentDidMount(){
-        const {onPage1Load} = this.props;
-        onPage1Load(0);
-    }
+    
     render() {
       const{ shops,handleShopId} = this.props;
         const classes = this.props.classes;
@@ -18,6 +15,7 @@ export class Page1 extends Component {
         {
           return <LaunchScreen />
         }
+        
         return (
             
             <Paper square className={classes.paper}>
@@ -25,7 +23,7 @@ export class Page1 extends Component {
             {
                 shops.map(({id, shopname, address, img, phoneno}) => (
                   <Box key={id} m={2}>
-                  <NearbyShopCard shopinfo={{id,shopname,address,img,phoneno}} handleShopId={handleShopId}/>
+                  <NearbyShopCard shopinfo={{id,shopname,address,img,phoneno}} handleShopId={handleShopId} index={this.props.index} user={this.props.user}/>
                   </Box>
                  
               ))}
@@ -36,10 +34,7 @@ export class Page1 extends Component {
     }
 
 
-    componentWillUnmount(){
-        const {onPage1Load} = this.props;
-        onPage1Load(1);
-    }
+   
 
     
 }
