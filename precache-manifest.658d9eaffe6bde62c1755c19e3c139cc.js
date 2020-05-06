@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b791d58c533d20f669386d6ab0c89f8e",
+    "revision": "ca169f1cbe6a55acb6ffa7314124fe9f",
     "url": "/printlymobile/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/printlymobile/static/css/2.0f2c0294.chunk.css"
   },
   {
-    "revision": "ceb43edbb32286e998bb",
+    "revision": "259cb0ecbb985bfdfab6",
     "url": "/printlymobile/static/css/main.844ba531.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/printlymobile/static/js/2.3d99d985.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "ceb43edbb32286e998bb",
-    "url": "/printlymobile/static/js/main.d46ac2f3.chunk.js"
+    "revision": "259cb0ecbb985bfdfab6",
+    "url": "/printlymobile/static/js/main.ae3be642.chunk.js"
   },
   {
     "revision": "4cc236fed6fcf2001dde",

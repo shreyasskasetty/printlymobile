@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/printlymobile/precache-manifest.8e7327d2689e8f11a27ea3d65a239897.js"
+  "/printlymobile/precache-manifest.658d9eaffe6bde62c1755c19e3c139cc.js"
 );
 
 self.addEventListener('message', (event) => {
