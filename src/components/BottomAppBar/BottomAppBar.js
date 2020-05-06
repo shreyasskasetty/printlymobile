@@ -26,6 +26,7 @@ import { Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import Tariff from '../Tariff/Tariff'
 
+
 const useStyles = theme=>({
     text: {
       textAlign:"center",
@@ -106,6 +107,7 @@ function TabPanel(props) {
           open: false
         }
       }
+      
      
     }
     openSnackbarSuccess = (message, autoHideDuration = 2, callback) => {

@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import CancelIcon from '@material-ui/icons/Cancel';
 import { 
     Paper,
     Button,
@@ -17,6 +19,12 @@ import {
          margin: `${theme.spacing(6)}px auto`,
          padding:`${theme.spacing(3)}px`,
      },
+     successIcon: {
+      color: 'green',
+    },
+    errorIcon: {
+      color: 'red',
+    },
      divider:{
         margin: "auto"
      },
@@ -34,8 +42,9 @@ import {
     },
   })(LinearProgress);
 class FileUpload extends Component {
-    render() {
-        const {values,fileUploadHandler,handleChange,prevStep,classes}=this.props
+   render() {
+      const {values,handleChange,prevStep,classes,nextStep,fileUploadHandler}=this.props
+     
         return (
             <React.Fragment>
                 <Paper className={classes.root}>
@@ -50,10 +59,13 @@ class FileUpload extends Component {
                     filesLimit={1}
                      onChange={handleChange}
                      showPreviews={true}
-                     maxFileSize={50000000}
+                     maxFileSize={5000000}
+                     dropzoneText="Drag and drop a file here or click to browse"
                      acceptedFiles={['image/jpeg', 'image/png','application/pdf','application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document']}
                  />
                 </Grid>
+                
+                {values.circularProgress ?<CircularProgress />:values.uploaderr&& values.progress===0?<CancelIcon className={classes.errorIcon}/>:values.progress===100?<CheckCircleIcon className={classes.successIcon}/>:null}
                 <Grid item xs={12} sm={12}>
                 <BorderLinearProgress
                     variant="determinate"
@@ -68,7 +80,12 @@ class FileUpload extends Component {
                 </Grid>
                 <Grid xs={5} sm={3} item>
                     <Button variant="contained" color="primary" onClick={fileUploadHandler}>
-                      Order Print
+                      Upload
+                    </Button>
+                </Grid>
+                <Grid xs={4} sm={5} item>
+        <Button variant="contained" disabled={true?false:!values.uploadComplete} color="primary" onClick={nextStep} >
+                      Payment
                     </Button>
                 </Grid>
                 </Grid>

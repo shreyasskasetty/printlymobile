@@ -6,9 +6,14 @@ import LaunchScreen from '../LaunchScreen'
 import {firestoreConnect,isLoaded} from 'react-redux-firebase'
 import {compose} from 'redux'
 import {connect} from 'react-redux'
+import {unsetSubmittedFlag} from '../Actions/formAction'
 export class Page1 extends Component {
-    
+    componentDidMount(){
+      const {unsetSubmitted} = this.props
+      unsetSubmitted();
+    }
     render() {
+     
       const{ shops,handleShopId} = this.props;
         const classes = this.props.classes;
         if(!isLoaded)
@@ -23,7 +28,7 @@ export class Page1 extends Component {
             {
                 shops.map(({id, shopname, address, img, phoneno}) => (
                   <Box key={id} m={2}>
-                  <NearbyShopCard shopinfo={{id,shopname,address,img,phoneno}} handleShopId={handleShopId} index={this.props.index} user={this.props.user}/>
+                  <NearbyShopCard shopinfo={{id,shopname,address,img,phoneno}} handleShopId={handleShopId}  user={this.props.user}/>
                   </Box>
                  
               ))}
@@ -43,8 +48,13 @@ const mapStatesToProps = (state)=> {
     shops: state.firestore.ordered.shops?state.firestore.ordered.shops:[]
   }
 }
+const mapDispatchToProps=(dispatch)=>{
+  return{
+    unsetSubmitted: ()=>{dispatch(unsetSubmittedFlag())}
+  }
+}
 export default compose(
-  connect(mapStatesToProps),
+  connect(mapStatesToProps,mapDispatchToProps),
   firestoreConnect([{collection:'shops'}]),
   
 )(Page1)

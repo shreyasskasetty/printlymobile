@@ -22,7 +22,20 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>%REACT_APP_TITLE%</title>
-    
+    <script>
+     function onGooglePayLoaded() {
+            window.googlePayClient = new google.payments.api.PaymentsClient({
+              environment: "TEST"
+            });
+          }
+    </script>
+    <script
+        async
+        src="https://pay.google.com/gp/p/js/pay.js"
+        onload="onGooglePayLoaded()"
+        >
+        
+      </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

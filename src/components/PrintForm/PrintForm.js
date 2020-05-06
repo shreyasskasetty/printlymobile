@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import PrintSpecifation from "./PrintSpecifation";
+import Payment from "./Payment";
 import FileUpload  from "./FileUpload";
 import axios from "axios";
 import { renderBackButton ,removeBackButton,removeBottomBar,renderBottomBar} from "../Actions/componentActions";
+import {submitForm } from "../Actions/formAction"
 import { connect } from "react-redux";
-import { createBrowserHistory } from 'history';
 import { CssBaseline } from '@material-ui/core';
-
-
+import { createBrowserHistory } from 'history';
 const history=createBrowserHistory()
+
 class PrintForm extends Component {
     constructor(props){
         super(props)
@@ -27,6 +28,9 @@ class PrintForm extends Component {
             pageOrientation:'PORTRAIT',
             extraComment:'',
             progress:0,
+            uploadComplete:false,
+            uploaderr:false,
+            circularProgress:false,
             
         }
        
@@ -65,12 +69,9 @@ class PrintForm extends Component {
             file:files[0]
         })
     }
-
-     
-    fileUploadHandler=()=>{
-        const {shopId,user}=this.props
+    formSubmitHandler=(paymentMode)=>{
+        const {shopId,user,submitForm}=this.props
         const {
-            file,
             noCopies,
             printType,
             noPagesPerSide,
@@ -81,34 +82,60 @@ class PrintForm extends Component {
             pageSize,
             pageOrientation,
             extraComment,
+            downloadLink
+        }= this.state;
+        const formDetails={
+            uid:user.uid,
+            shopId:shopId.id,
+            noCopies: noCopies,
+            printType:printType,
+            noPagesPerSide:noPagesPerSide,
+            ink:ink,
+            pgStart:pgStart,
+            pgEnd:pgEnd,
+            allPages:allPages,
+            pageSize:pageSize,
+            pageOrientation: pageOrientation,
+            extraComment:extraComment,
+            download_url:downloadLink,
+            paymentMode: paymentMode,
+        }
+        submitForm(formDetails);
+
+        
+
+    }
+        
+    componentDidUpdate(){
+        const {submitted}=this.props;
+        console.log(submitted)
+        if(submitted)
+        {
+            this.props.openSnackbarSuccess("Order Succesfully Placed")
+            history.goBack()
+            history.push('/')
+        }
+    }
+     
+    fileUploadHandler=(PaymentMode)=>{
+        const {
+            file,
         }= this.state;
         const fd = new FormData();
-        console.log(shopId.id)
        try{
         fd.append('file',file,file.name)
        }catch(err){
            console.log(err)
        }
-
-        fd.append('userId',user.uid)
         if(file)
         {
         fd.append('filename',file.name)
-        fd.append('username',`${user.firstName} ${user.lastName}`)
+        
         }
-        fd.append('shopId',shopId.id)
-        fd.append('noCopies',noCopies)
-        fd.append('printType',printType)
-        fd.append('noPagesPerSide',noPagesPerSide)
-        fd.append('ink',ink)
-        fd.append('pgStart',pgStart)
-        fd.append('pgEnd',pgEnd)
-        fd.append('allPages',allPages)
-        fd.append('pageSize',pageSize)
-        fd.append('pageOrientation',pageOrientation)
-        fd.append('extraComment',extraComment)
+        
         console.log(fd)
         let progress=0
+        this.setState({circularProgress:true})
         axios.post('https://us-central1-printly-3ea29.cloudfunctions.net/uploadFile',fd,{
             onUploadProgress: progressEvent=>{
                progress=Math.round(progressEvent.loaded/progressEvent.total*100)
@@ -118,13 +145,17 @@ class PrintForm extends Component {
         })
         .then(res=>{
             console.log(res)
-            if(res)
-                this.props.openSnackbarSuccess("Order Placed Successfuly")
-            history.goBack()
-            history.push('/')
+            if(res.status===200)
+                {this.props.openSnackbarSuccess("File Uploaded Successfully")
+                this.setState({circularProgress:false,uploadComplete:true})
+            }
+            
         }).catch(err=>{
             console.log(err)
-            this.props.openSnackbarError("Upload the file")
+           
+            this.setState({uploaderr:true,circularProgress:false});
+            console.log(this.state)
+            this.props.openSnackbarError("Warning! No file added to upload!")
         })
     }
     render() {
@@ -144,11 +175,16 @@ class PrintForm extends Component {
             pageOrientation,
             extraComment,
             progress,
-           
+            uploaderr,
+            circularProgress,
+           uploadComplete,
         }= this.state;
         const fileUploadValues={
             files,
-            progress 
+            progress,
+            uploaderr,
+            circularProgress,
+            uploadComplete,
         }
         const printSpecificationValues={
             noCopies,
@@ -188,6 +224,10 @@ class PrintForm extends Component {
                    
                     </>
                 )
+            case 3:
+                return(  
+                    <Payment formSubmitHandler={(PaymentMode)=>{this.formSubmitHandler(PaymentMode)}} nextStep = {this.nextStep} prevStep={this.prevStep}/>
+                )
             default: return(
                 <CssBaseline />
             )
@@ -199,7 +239,14 @@ const  mapDispatchToProps=(dispatch)=>{
         renderBackButton: ()=>dispatch(renderBackButton()),
         removeBackButton: ()=>dispatch(removeBackButton()),
         removeBottomBar: ()=>dispatch(removeBottomBar()),
-        renderBottomBar: ()=>dispatch(renderBottomBar())
+        renderBottomBar: ()=>dispatch(renderBottomBar()),
+        submitForm: (formDetails)=>dispatch(submitForm(formDetails)),
     }
 }
-export default connect(null,mapDispatchToProps)(PrintForm)
+const mapStateToProps=(state)=>{
+    console.log(state)
+    return {
+        submitted: state.formReducer.submitted
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(PrintForm)
