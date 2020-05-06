@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/printlymobile/static/css/main.844ba531.chunk.css",
-    "main.js": "/printlymobile/static/js/main.ae3be642.chunk.js",
+    "main.js": "/printlymobile/static/js/main.885971e9.chunk.js",
     "runtime-main.js": "/printlymobile/static/js/runtime-main.2debe08f.js",
     "static/css/2.0f2c0294.chunk.css": "/printlymobile/static/css/2.0f2c0294.chunk.css",
     "static/js/2.3d99d985.chunk.js": "/printlymobile/static/js/2.3d99d985.chunk.js",
     "index.html": "/printlymobile/index.html",
-    "precache-manifest.658d9eaffe6bde62c1755c19e3c139cc.js": "/printlymobile/precache-manifest.658d9eaffe6bde62c1755c19e3c139cc.js",
+    "precache-manifest.f88d01eceecff82f4529f3a177b24534.js": "/printlymobile/precache-manifest.f88d01eceecff82f4529f3a177b24534.js",
     "service-worker.js": "/printlymobile/service-worker.js",
     "static/js/2.3d99d985.chunk.js.LICENSE.txt": "/printlymobile/static/js/2.3d99d985.chunk.js.LICENSE.txt",
     "static/media/error.5446a452.svg": "/printlymobile/static/media/error.5446a452.svg",
@@ -20,6 +20,6 @@
     "static/css/2.0f2c0294.chunk.css",
     "static/js/2.3d99d985.chunk.js",
     "static/css/main.844ba531.chunk.css",
-    "static/js/main.ae3be642.chunk.js"
+    "static/js/main.885971e9.chunk.js"
   ]
 }
