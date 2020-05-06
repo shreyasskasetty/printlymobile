@@ -84,7 +84,7 @@ class FileUpload extends Component {
                     </Button>
                 </Grid>
                 <Grid xs={4} sm={5} item>
-        <Button variant="contained" disabled={true?false:!values.uploadComplete} color="primary" onClick={nextStep} >
+        <Button variant="contained" disabled={!values.uploadComplete} color="primary" onClick={nextStep} >
                       Payment
                     </Button>
                 </Grid>
