@@ -147,7 +147,7 @@ class PrintForm extends Component {
             console.log(res)
             if(res.status===200)
                 {this.props.openSnackbarSuccess("File Uploaded Successfully")
-                this.setState({circularProgress:false,uploadComplete:true})
+                this.setState({circularProgress:false,uploadComplete:true,downloadLink:res.download_url});  
             }
             
         }).catch(err=>{
